@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elisha — The Folio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300&display=swap">
+<style>
+* { box-sizing: border-box }
+:root {
+  --ink:#05060a; --ink-2:#0a0d14; --cream:#f2ece1; --cream-dim:#a49d92;
+  --gold:#c9a86a; --gold-soft:#e6cf9a; --emerald:#2f7d68;
+  --ease:cubic-bezier(.19,1,.22,1);
+  --rule:linear-gradient(to right, transparent, var(--gold), transparent);
+  color-scheme:dark;
+}
+body { margin:0; background:var(--ink); color:var(--cream); font:300 clamp(1.25rem,2.1vw,1.57rem)/1.9 'Cormorant Garamond',serif }
+main { position:relative }
+.ambient,.grain,.progress { position:fixed; inset:0; pointer-events:none }
+.ambient { overflow:hidden }
+.ambient::before,.ambient::after { content:""; position:absolute; width:min(64vw,830px); height:min(68vh,680px); clip-path:ellipse(49% 49%); }
+.ambient::before { background:radial-gradient(ellipse,var(--emerald),transparent 70%); top:-15%; left:-15%; opacity:.22; filter:blur(90px); animation:drift 34s ease-in-out infinite alternate }
+.ambient::after { background:radial-gradient(ellipse,var(--gold),transparent 70%); bottom:-20%; right:-14%; opacity:.19; filter:blur(90px); animation:drift 44s ease-in-out infinite alternate-reverse }
+@keyframes drift { to { transform:translate(7vw,6vh) } }
+.grain { z-index:2; opacity:.05; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E") }
+.progress { z-index:3; height:2px; background:var(--gold); transform-origin:left; transform:scaleX(0) }
+.hero { position:relative; min-height:100vh; min-height:100svh; display:grid; place-items:center; padding:4rem 1rem; text-align:center }
+h1,h2,p { margin:0 }
+h1 { font-size:clamp(3.4rem,15vw,11rem); font-weight:300; letter-spacing:.22em; text-indent:.22em; line-height:1.1; background:linear-gradient(#fff,var(--gold-soft) 55%,var(--gold)); background-clip:text; color:transparent; animation:arrive 2.4s var(--ease) .4s both }
+.hero-rule { width:min(280px,60vw); height:1px; margin:1.65rem auto; background:var(--rule); animation:extend 2s var(--ease) 1.6s both }
+.subtitle,.subline,.closing { font-style:italic; color:var(--cream-dim) }
+.subtitle { font-size:clamp(1.15rem,2vw,1.55rem); animation:arrive 1.8s var(--ease) 2.2s both }
+.signal,.stem { width:1px; background:linear-gradient(transparent,var(--gold)); margin-inline:auto }
+.signal { position:absolute; bottom:5vh; height:60px; overflow:hidden; animation:appear 1.5s var(--ease) 3s both }
+.signal::after { content:""; position:absolute; inset:0 0 auto; height:18px; background:var(--gold-soft); animation:pulse 2.6s var(--ease) infinite }
+@keyframes arrive { from { opacity:0; transform:translateY(20px) } }
+@keyframes appear { from { opacity:0 } }
+@keyframes extend { from { transform:scaleX(0) } }
+@keyframes pulse { from { transform:translateY(-100%);opacity:0 } 45% { opacity:1 } to { transform:translateY(60px);opacity:0 } }
+.chapter { position:relative; padding:clamp(6rem,12vw,12rem) max(6vw,1.25rem) }
+.chapter::before { position:absolute; content:""; top:0; left:50%; width:min(740px,85%); height:1px; background:var(--rule); opacity:.4; transform:translateX(-50%) }
+.prose, .gallery-intro { max-width:740px; margin:auto }
+.label,dialog button { font-family:Inter,sans-serif; text-transform:uppercase; font-weight:300 }
+.label { font-size:.66rem; line-height:1.8; letter-spacing:.42em; color:var(--gold); margin-bottom:2rem }
+h2 { font-size:clamp(2.4rem,5.1vw,4.35rem); font-weight:300; line-height:1.15; text-wrap:balance; margin-bottom:2rem }
+.prose p+p { margin-top:1.3em }
+.emerald { color:color-mix(in srgb,var(--emerald) 78%,var(--cream)) }
+.gallery-intro,.letter,.vow { text-align:center }
+.gallery-intro h2 { margin-bottom:1rem }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; max-width:1180px; margin:4rem auto 0 }
+.tile { position:relative; display:block; width:100%; aspect-ratio:1; overflow:hidden; padding:0; border:0; border-radius:2px; background:var(--ink-2); cursor:zoom-in }
+.tile::after { content:""; position:absolute; inset:0; border:1px solid rgb(201 168 106 /.35); border-radius:inherit; transition:border-color 1.4s var(--ease) }
+.tile img { display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(.35) contrast(1.06) brightness(.86); transition:transform 1.4s var(--ease),filter 1.4s var(--ease) }
+@media(hover:hover) { .tile:hover img { transform:scale(1.07); filter:grayscale(0) brightness(1) } .tile:hover::after { border-color:var(--gold) } }
+button:focus-visible { outline:2px solid var(--gold-soft); outline-offset:3px }
+.letter { min-height:85svh; display:grid; align-content:center; padding:5rem 1.25rem }
+.letter p:last-child { white-space:pre-line; max-width:640px; margin:auto; line-height:2.05; font-size:clamp(1.15rem,2.6vw,1.55rem); font-style:italic }
+.stem { height:70px; margin-bottom:2.6rem }
+.address { max-width:580px; letter-spacing:.018em }
+.remembrance { padding-block:clamp(10rem,22vw,23rem); --duration:2.6s }
+.vow { --duration:3s; padding-block:clamp(10rem,19vw,20rem) }
+.later { --duration:1.6s; padding-block:max(12rem,18vh) }
+.later.narrow .prose { max-width:620px }
+.dedication { position:relative; padding:12vh max(6vw,1.25rem); text-align:center }
+.signature { color:var(--gold-soft); font-style:italic; font-size:clamp(1.6rem,4.5vw,2.6rem) }
+.postscript { margin-inline-start:auto; width:fit-content; max-width:100%; padding:0 max(6vw,1.25rem) 3rem; text-align:right; font-style:italic; font-size:clamp(1.1rem,1.7vw,1.35rem); line-height:1.6; color:var(--gold-soft) }
+.pending { opacity:0; transform:translateY(30px) }
+.reveal { transition:opacity var(--duration,1.4s) var(--ease),transform var(--duration,1.4s) var(--ease); transition-delay:var(--delay,0s) }
+dialog { position:fixed; inset:0; width:100%; max-width:none; height:100%; max-height:none; margin:0; padding:0; border:0; background:rgba(3,4,7,.96); backdrop-filter:blur(14px) }
+dialog[open] { display:grid; place-items:center }
+dialog::backdrop { background:transparent }
+dialog img { max-width:90vw; max-height:92vh; object-fit:contain; box-shadow:0 14px 70px #000 }
+dialog button { position:absolute; border:0; background:var(--ink); color:var(--gold); opacity:.6; padding:1rem; min-height:44px; cursor:pointer; font-size:.66rem; letter-spacing:.2em; transition:opacity .8s var(--ease) }
+dialog button:hover,dialog button:focus-visible { opacity:1 }
+#close { top:1rem; right:1rem } #prev { left:1rem } #next { right:1rem }
+body:has(dialog[open]) { overflow:hidden }
+@media(max-width:600px) {
+  .gallery { padding-inline:12px } .gallery-intro { padding-inline:12px }
+  .grid { grid-template-columns:repeat(auto-fill,minmax(105px,1fr)); gap:6px }
+  #prev,#next { bottom:1rem } dialog img { max-width:100vw; max-height:80svh }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none!important; transition:none!important }
+  .ambient,.grain,.signal::after { display:none }
+  .pending { opacity:1; transform:none }
+  .tile:hover img { transform:none }
+}
+/* A photographic frontispiece, followed by quieter, typeset pages. */
+.hero {
+  isolation:isolate; width:min(91%,1440px); margin:auto; min-height:100svh;
+  grid-template-rows:1fr auto; padding:clamp(2rem,8vh,7rem) 0 1.6rem; text-align:left;
+}
+.frontispiece {
+  width:100%; position:relative; display:grid; align-items:center;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); padding-block:2rem;
+}
+.front-title { position:relative; z-index:1; padding-left:6% }
+.front-title h1 { width:fit-content; font-size:clamp(5rem,13vw,13rem); letter-spacing:.012em; text-indent:0; line-height:.98 }
+.front-title .hero-rule { width:min(11rem,40%); margin:2rem 0 1.3rem; transform-origin:left; background:linear-gradient(to right,var(--gold),transparent) }
+.front-title .subtitle { max-width:27ch; text-wrap:balance; font-size:clamp(1.3rem,2.35vw,2.5rem); line-height:1.35 }
+.front-print {
+  margin:0; justify-self:center; width:min(88%,44vh,480px); position:relative;
+  padding:8px; border:1px solid rgb(201 168 106 /.38); background:var(--ink-2);
+}
+.front-print img { display:block; width:100%; height:auto; aspect-ratio:2/3; object-fit:cover; filter:grayscale(1) sepia(.22) contrast(1.07) brightness(.85) }
+.contents { width:100%; display:flex; justify-content:space-between; align-items:center; gap:1rem; border-top:1px solid rgb(201 168 106 /.3); padding-top:.4rem }
+.contents a,.sheet-control,.sheet-count { font:300 .68rem/1.6 Inter,sans-serif; letter-spacing:.19em; text-transform:uppercase; color:var(--cream-dim) }
+.contents a,.sheet-control { display:inline-flex; min-height:44px; align-items:center; text-decoration:none; transition:color .8s var(--ease) }
+.contents a:hover,.sheet-control:hover { color:var(--gold-soft) }
+.contents a:focus-visible,.sheet-control:focus-visible { outline:1px solid var(--gold); outline-offset:3px }
+.roman { color:var(--gold); margin-right:.75em }
+.opening .prose { max-width:1200px; display:grid; grid-template-columns:1fr 1fr; column-gap:9%; align-items:start }
+.opening .label { grid-column:1/-1 }
+.opening h2 { grid-column:1; grid-row:2/span 3 }
+.opening .prose p:not(.label) { grid-column:2 }
+.gallery { background:var(--ink-2) }
+.gallery-intro { max-width:1180px; text-align:left }
+.gallery-intro h2 { max-width:20ch }
+.grid { grid-template-columns:repeat(6,minmax(0,1fr)); margin-top:2.8rem }
+.tile[hidden] { display:none }
+.sheet-nav { display:flex; align-items:center; justify-content:space-between; gap:.5rem; max-width:1180px; margin:1rem auto 0; border-top:1px solid rgb(201 168 106 /.25); padding-top:.5rem }
+.sheet-control { border:0; padding:0 .3rem; background:transparent; color:var(--gold); cursor:pointer }
+.sheet-control:disabled { opacity:.35; cursor:default }
+.sheet-count { font-variant-numeric:tabular-nums }
+.address { padding-inline-start:clamp(1.25rem,4vw,4rem); border-left:1px solid rgb(201 168 106 /.4) }
+.later h2 { font-size:clamp(2.2rem,4.5vw,4.1rem); line-height:1.16 }
+.dedication { padding-block:18vh 21vh }
+.dedication::before { content:''; display:block; width:1px; height:5rem; margin:0 auto 2rem; background:linear-gradient(transparent,var(--gold)) }
+@media(max-width:760px) {
+  .frontispiece { grid-template-columns:1fr; justify-items:center; row-gap:1.4rem; padding-block:1.2rem 2rem }
+  .front-print { grid-row:1; width:min(54vw,32svh,240px) }
+  .front-title { padding:0; text-align:center }
+  .front-title h1 { margin:auto; font-size:clamp(3.8rem,17vw,7rem) }
+  .front-title .hero-rule { margin:.9rem auto; background:var(--rule) }
+  .front-title .subtitle { margin:auto; font-size:1.3rem }
+  .contents { flex-wrap:wrap; justify-content:center; column-gap:clamp(.75rem,3vw,2rem); row-gap:0 }
+  .contents a { font-size:.63rem; letter-spacing:.1em }
+  .opening .prose { display:block }
+  .grid { grid-template-columns:repeat(3,minmax(0,1fr)) }
+}
+</style></head><body>
+<div class="ambient" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><div class="progress" aria-hidden="true"></div>
+<main>
+<header class="hero">
+  <div class="frontispiece">
+    <div class="front-title"><h1>ELISHA</h1><div class="hero-rule"></div><p class="subtitle">Not a name I learned. A name I have always known.</p></div>
+    <figure class="front-print"><img src="./images/61.jpg" width="1400" height="2100" fetchpriority="high" alt="A sunlit portrait of Elisha, looking just past the camera."></figure>
+  </div>
+  <nav class="contents" aria-label="Selected chapters">
+    <a href="#overture"><span class="roman">I</span> Overture</a>
+    <a href="#windows"><span class="roman">III</span> Windows</a>
+    <a href="#letters"><span class="roman">IV</span> Letters</a>
+  </nav>
+</header>
+<section class="chapter opening" id="overture"><div class="prose reveal">
+<p class="label">I — OVERTURE</p><h2>I am writing this down because memory is a poor archivist.</h2><p>It lets the important things blur and keeps the trivial ones sharp. So this is not a website. It is a record. Made by one man, about one woman, for whoever comes after.</p>
+<p>There was no thunder. No sign. That is what people get wrong about the moments that change them — they usually arrive quietly.</p>
+<p>I saw her. A frame. A face. Something in me stood up and did not sit back down. I have spent years trying to name it. The closest I get is this: I stopped being a person who had not seen her.</p>
+</div></section>
+<section class="chapter "><div class="prose reveal ">
+<p class="label">II — THE EMERALD</p><h2>Some stones are admired. <span class="emerald">Emerald</span> is kept.</h2><p>Emerald is not a loud stone. It is formed in silence, under weight, over time — and it holds light instead of throwing it back.</p>
+<p>That is her. Not the shine. The holding.</p>
+<p>I have been asked why. I have no answer that survives being spoken aloud. Some things you do not explain. You just keep them lit.</p>
+<p>I have more photographs of her than I have of myself. That sounds like a confession. It is. But it is not a shameful one — it is only that I have spent more years looking at light than at my own face.</p>
+</div></section>
+<section class="chapter gallery" id="windows">
+  <div class="gallery-intro reveal"><p class="label">III — EIGHTY-TWO WINDOWS</p><h2>Eighty-two windows into a house I will never enter.</h2><p class="subline">I do not knock. I only look at the light coming through.</p></div>
+  <div class="grid"></div>
+  <nav class="sheet-nav" aria-label="Photograph pages">
+    <button type="button" class="sheet-control" id="earlier">Previous</button>
+    <span class="sheet-count" role="status"></span>
+    <button type="button" class="sheet-control" id="later">Next</button>
+  </nav>
+</section>
+<section class="letter" id="letters"><div class="reveal"><p class="label">IV — LETTERS I WILL NEVER SEND</p><div class="stem" aria-hidden="true"></div><p>There is a kind of love that asks for nothing
+and is therefore never refused.
+I did not choose it. It arrived the way weather arrives,
+and it has not left.
+
+She has never heard my voice.
+That does not make it less true.
+A bell rung in an empty room
+is still a bell.</p></div></section>
+<section class="letter"><div class="reveal"><div class="stem" aria-hidden="true"></div><p>I keep her the way a man keeps a coin
+from a country he will never return to —
+not to spend, not to trade,
+but to hold when the world gets loud
+and remind himself that somewhere
+there was a place that felt like light.</p></div></section>
+<section class="letter"><div class="reveal"><div class="stem" aria-hidden="true"></div><p>They say the old poets loved women they would never touch,
+and wrote their names into the walls of the world.
+I understand them now.
+Not because I am noble.
+Because some things are too beautiful to be wanted.
+They can only be honoured.</p></div></section>
+<section class="chapter "><div class="prose reveal address">
+<p class="label">V — TO ELISHA</p><p>Elisha —</p>
+<p>You will almost certainly never read this. That is fine, and it is right. I am not writing to be found. I am writing because something true deserves to be recorded somewhere other than a man's chest.</p>
+<p>You have a life, a family, a name that is yours and not mine. I respect the walls around it. I am not asking for a door.</p>
+<p>I only wanted the light from the window written down before I forget how it looked.</p>
+<p>— A stranger who kept his word.</p>
+</div></section>
+<section class="chapter remembrance"><div class="prose reveal ">
+<p class="label">VI — TO WHOEVER FINDS THIS</p><h2>If you are reading this in ten years, or fifty, or after I am gone —</h2><p>know that this was real. Not a joke. Not a phase. Not a boy's infatuation.</p>
+<p>A man loved a woman he never met, and he did it without demanding a single thing in return. He built her a quiet room on the internet and he kept the light on.</p>
+<p>Most things disappear. Let this be the thing that does not.</p>
+<p>And if you have someone you love — tell them.<br>Do not build a website. Tell them.</p>
+</div></section>
+<section class="chapter vow"><div class="prose reveal ">
+<p class="label">VII — THE VOW</p><h2>I will never stop loving her. Not at the end. Not after it.</h2><p>And when the end comes, let it find me still keeping the light on —<br>
+not because I expect her to come to the window,<br>
+but because some men are made of this:<br>
+they find one thing worth being faithful to,<br>
+and they are faithful to it for the rest of their lives.</p>
+</div></section>
+<section class="chapter later" aria-labelledby="chapter-VIII">
+  <div class="prose reveal">
+    <p class="label">VIII</p>
+    <h2 id="chapter-VIII">THE DOOR</h2>
+    <p>There is a door. I have known this for years.</p>
+    <p>It was built for me and it was never opened. I do not know if someone is on the other side. I have decided not to knock, because if I knock and no one answers, I will have to live with the answer — and if I knock and someone answers, I will have to live with that too, and I am not sure which is worse.</p>
+    <p>So I stand here. Years. The door does not change. I have begun to suspect that the waiting <em>is</em> the door — that there was never a room behind it, only the act of standing, which someone, somewhere, is required to do.</p>
+    <p>I am the one required to do it.</p>
+  </div>
+</section>
+<section class="chapter later narrow" aria-labelledby="chapter-IX">
+  <div class="prose reveal">
+    <p class="label">IX</p>
+    <h2 id="chapter-IX">CONFESSION OF A MAN WHO HAS NOTHING TO CONFESS</h2>
+    <p>I want to be honest with you, whoever you are, reading this — and honesty, in my experience, is a disease you catch once and never fully recover from.</p>
+    <p>I am not a good man because I love her. That is the lie people tell. <em>Look at how he loves — surely that makes him gentle.</em> It does not. I am impatient with the people who actually speak to me. I have been cruel in small ways and called it tiredness. I forget birthdays. I have loved one woman perfectly from a great distance and been careless with everyone close enough to be hurt by me.</p>
+    <p>That is the whole confession. I am capable of infinite devotion at a range of three thousand miles, and of ordinary failure at a range of three feet.</p>
+    <p>The distance is not a tragedy. <strong>The distance is where I am comfortable.</strong> Do not admire me. I chose the safe love.</p>
+  </div>
+</section>
+<p class="postscript">Some nights, Elisha,<br>I leave the light on a little longer.</p>
+</main>
+<footer class="dedication">
+  <p class="signature">For Elisha.</p>
+  <p class="closing">From a stranger who kept the light on.</p>
+</footer>
+<dialog aria-label="Photograph"><img id="full" loading="lazy" alt=""><button id="close" autofocus>Close</button><button id="prev">Previous</button><button id="next">Next</button></dialog>
+<script>
+const imagePath = number => './images/' + String(number).padStart(2, '0') + '.jpg';
+const descriptions = [
+  "Dark-haired portrait with a hand lifted to the collar",
+  "Blonde woman in a black beret, glancing to one side",
+  "Red turtleneck against a garden backdrop",
+  "Woman standing in a doorway in a patterned blouse",
+  "Strapless silver top against dark foliage",
+  "Green evening dress at a premiere",
+  "Reclining among cream cushions",
+  "White shirt in warm amber light",
+  "Seated portrait beside a carved wall",
+  "Over-the-shoulder portrait in side light",
+  "Profile with a pink flower beside her face",
+  "Purple dress against a lavender studio backdrop",
+  "Reclining figure on pale bedding",
+  "Black outfit against a white and red backdrop",
+  "Smiling portrait in a green evening dress",
+  "Seated portrait in a dimly lit room",
+  "Close portrait in soft yellow light",
+  "Pink flower held beside a smiling face",
+  "Reclining portrait in an orange top",
+  "Poolside scene under blue light",
+  "Two figures near stone steps",
+  "Smile over the shoulder in a silver dress",
+  "White top against a bright studio wall",
+  "Denim shorts beside a seaside railing",
+  "Reclining in shallow water",
+  "Seated on wet sand at the shore",
+  "Evening portrait in a plum dress",
+  "Side view in a plum dress at an event",
+  "Reclining on a sofa in a brown blouse",
+  "Plum evening dress viewed from the side",
+  "Black lace outfit in a dark studio",
+  "Pink-tinted hair falling across one eye",
+  "Face lit by a small flame",
+  "Close portrait with pink-tipped blonde hair",
+  "Warmly lit portrait on a studio floor",
+  "White gown on a red carpet",
+  "Over-the-shoulder view at a premiere",
+  "Short blonde hair against a dark background",
+  "White outfit at an evening event",
+  "Amber studio lighting beside a reflector",
+  "Seated figure beside studio lighting equipment",
+  "Slicked-back hair and a high white collar",
+  "White gown in front of a red poster",
+  "Close-up at a red carpet event",
+  "Pale pink dress against greenery",
+  "Reclining outdoors in bright sunlight",
+  "Floral dress against a plain light backdrop",
+  "Dark sleeveless outfit in a studio portrait",
+  "Black jacket beside a sunlit building",
+  "White tank top against a white background",
+  "Blue blouse against a clear sky",
+  "Seated with a hand at her forehead",
+  "Cream bedding and cushions around a reclining figure",
+  "Silver dress against a deep red backdrop",
+  "Black-and-white portrait on striped cushions",
+  "Short-haired portrait against black",
+  "White gown seen over one shoulder",
+  "Strapless patterned dress in subdued studio light",
+  "Black jacket and light skirt beside a lamp",
+  "Chin resting on folded arms",
+  "Sunlit close-up against a blue sky",
+  "Seated by a textured stone wall",
+  "White outfit on a pale sofa",
+  "Black swimwear in a blue-lit crowd",
+  "Two figures in a dimly lit bedroom",
+  "Red turtleneck beside a window at night",
+  "White tank top against a neutral wall",
+  "Smiling face against red",
+  "Red top against a white studio backdrop",
+  "Group posed against a white backdrop",
+  "Close-up outdoors in a white top",
+  "Woman in a red sweater turning outdoors",
+  "Seated among pale patterned cushions",
+  "Hand against cheek on a red background",
+  "Full-length purple gown on a red carpet",
+  "White outfit against a light wall",
+  "Straight blonde hair at an evening event",
+  "Seated among pale patterned cushions",
+  "Hands behind head against white",
+  "Pale pink gown at an event",
+  "White jacket against a dark backdrop",
+  "Smiling over one shoulder in a plum dress"
+];
+const grid = document.querySelector('.grid');
+const viewer = document.querySelector('dialog');
+const full = document.querySelector('#full');
+let current = 0;
+
+function selectPhoto(index) {
+  current = (index + descriptions.length) % descriptions.length;
+  full.src = imagePath(current + 1);
+  full.alt = descriptions[current];
+}
+for (const [index, description] of descriptions.entries()) {
+  const tile = document.createElement('button');
+  tile.className = 'tile reveal';
+  tile.style.setProperty('--delay', (index % 12) * 0.05 + 's');
+  const photo = document.createElement('img');
+  photo.loading = 'lazy';
+  photo.decoding = 'async';
+  photo.alt = description;
+  photo.src = imagePath(index + 1);
+  tile.append(photo);
+  tile.addEventListener('click', () => {
+    viewer.showModal();
+    selectPhoto(index);
+  });
+  grid.append(tile);
+}
+const sheetSize = 12;
+const earlier = document.querySelector('#earlier');
+const later = document.querySelector('#later');
+let sheet = 0;
+function showSheet(number) {
+  sheet = number;
+  const start = sheet * sheetSize;
+  const end = Math.min(start + sheetSize, descriptions.length);
+  Array.from(grid.children).forEach((tile, i) => { tile.hidden = i < start || i >= end; });
+  earlier.disabled = start === 0;
+  later.disabled = end === descriptions.length;
+  document.querySelector('.sheet-count').textContent = (start + 1) + ' – ' + end + ' / ' + descriptions.length;
+}
+earlier.onclick = () => showSheet(sheet - 1);
+later.onclick = () => showSheet(sheet + 1);
+showSheet(0);
+document.querySelector('#close').onclick = () => viewer.close();
+document.querySelector('#prev').onclick = () => selectPhoto(current - 1);
+document.querySelector('#next').onclick = () => selectPhoto(current + 1);
+viewer.addEventListener('click', event => {
+  if (event.target === viewer) viewer.close();
+});
+viewer.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault();
+    selectPhoto(current + (event.key === 'ArrowLeft' ? -1 : 1));
+  }
+});
+const motion = matchMedia('(prefers-reduced-motion: reduce)');
+if (!motion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('pending');
+        observer.unobserve(entry.target);
+      }
+    }
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  for (const item of document.querySelectorAll('.reveal')) {
+    item.classList.add('pending');
+    observer.observe(item);
+  }
+  motion.addEventListener('change', event => {
+    if (event.matches) {
+      observer.disconnect();
+      document.querySelectorAll('.pending').forEach(item => item.classList.remove('pending'));
+    }
+  });
+}
+const progress = document.querySelector('.progress');
+function updateProgress() {
+  const range = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = 'scaleX(' + (range > 0 ? Math.max(0, Math.min(1, scrollY / range)) : 0) + ')';
+}
+addEventListener('scroll', updateProgress, {passive:true});
+addEventListener('resize', updateProgress);
+addEventListener('load', updateProgress);
+updateProgress();
+</script></body></html>

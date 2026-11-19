@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Afterimage — Elisha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Baskervville:ital@0;1&family=IBM+Plex+Mono:wght@500&display=swap" media="print" onload="this.media='all'">
+<style>*{box-sizing:border-box}
+:root{--paper:#eef0e9;--ink:#162c48;--blue:#174da8;--cyan:#a8d6e9;--rule:#9aaab2;--mono:'IBM Plex Mono',monospace;--display:'Barlow Condensed','Arial Narrow',sans-serif;--prose:Baskervville,Georgia,serif;color-scheme:light}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 clamp(1.08rem,1.45vw,1.35rem)/1.75 var(--prose)}
+h1,h2,h3,p,figure{margin:0}h1,h2,h3{font-family:var(--display);font-weight:600;line-height:.95}a{color:inherit;text-decoration:none}button{cursor:pointer;color:inherit}button:disabled{cursor:default}a:focus-visible,button:focus-visible{outline:3px solid #e27243;outline-offset:3px}
+.wrap{width:min(90%,1480px);margin:auto}
+.micro,.mast nav,button,.caption,output{font:500 .7rem/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.mast,.ledger,.controls,.caption,.strip,.toolrow{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.mast{padding-block:1rem;border-bottom:1px solid var(--ink)}.brand{font:600 1.45rem/.95 var(--display);letter-spacing:.05em;text-transform:uppercase}.mast nav{display:flex;gap:clamp(.8rem,3vw,3rem)}nav a{padding:.6rem 0}nav a:hover{text-decoration:underline;text-underline-offset:.3em}
+.heading{display:grid;grid-template-columns:2.3fr 1fr;align-items:end;gap:1rem;margin:clamp(2.2rem,5vw,5rem) 0 1.65rem}
+.heading .micro{color:var(--blue)}h1{font-size:clamp(5rem,13.6vw,14rem);letter-spacing:-.045em;line-height:.84;margin-top:.7rem}.deck{max-width:22ch;font-size:clamp(1.28rem,2.55vw,2.7rem);line-height:1.2;font-style:italic;padding-bottom:.15rem}
+.light-table{display:grid;grid-template-columns:3fr 1fr;gap:clamp(.8rem,2.25vw,2.5rem);border-top:1px solid var(--ink);padding-top:1rem}
+.print{position:relative;isolation:isolate;overflow:hidden;background:#16569f}
+.print img{width:100%;height:100%;display:block;object-fit:cover}
+.print.tinted img{filter:grayscale(1) contrast(1.14);mix-blend-mode:screen}
+.mainprint{height:clamp(300px,47vw,58vh);min-height:290px}.mainprint img{object-position:50% var(--focus,26%)}
+.folio-tab{position:absolute;bottom:0;left:0;margin:.9rem;background:var(--paper);color:var(--blue);padding:.22rem .5rem}
+.side{display:flex;flex-direction:column;justify-content:space-between;gap:.8rem}.side .micro{color:var(--blue)}
+.proofs{display:grid;gap:.55rem}.proof{display:grid;grid-template-columns:1fr 35%;width:100%;align-items:center;padding:0;background:transparent;border:0;border-bottom:1px solid var(--rule);text-align:left}
+.proof img{width:100%;height:clamp(48px,7vh,85px);object-fit:cover;filter:grayscale(1);opacity:.7}
+.proof[aria-pressed=true]{border-color:var(--blue);color:var(--blue)}.proof[aria-pressed=true] img{filter:none;opacity:1}.proof[aria-pressed=true] span::before{content:'●';margin-right:.45rem}
+.mode,.plain{border:1px solid currentColor;background:transparent;padding:.7rem .9rem;min-height:44px}.mode{width:100%;color:var(--blue)}.mode:hover,.plain:hover:not(:disabled){background:var(--blue);color:white}
+.caption{padding:.7rem 0 1rem;color:var(--blue);align-items:baseline}.caption span:last-child{text-align:right}
+.spread,.essay{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,8vw,9rem)}
+.section{padding-block:clamp(4.7rem,9vw,10rem)}.folio{display:block;color:var(--blue);margin-bottom:1.2rem}h2{font-size:clamp(3.35rem,6.5vw,7rem);letter-spacing:-.035em;text-wrap:balance}
+.copy{max-width:58ch}.copy p+p,.leaf p+p{margin-top:1.2em}.spread+.spread{border-top:1px solid var(--rule)}
+.stone{background:#d6e4e2}.stone .copy em{color:#185747}
+.archive{background:#173d74;color:#f3f4ed}.archive .folio{color:var(--cyan)}.archive-intro{display:flex;align-items:end;justify-content:space-between;gap:2rem}.archive-intro p{max-width:34ch;font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(.45rem,1.1vw,1.2rem);margin-block:2rem 1rem}
+.frame{display:block;width:100%;padding:0;border:0;background:transparent;text-align:left;color:inherit}.frame img{width:100%;aspect-ratio:1.18;display:block;object-fit:cover}.frame span{display:block;padding:.32rem 0;color:#c8dff2}.frame:hover img{outline:1px solid currentColor}
+.controls{border-top:1px solid #94aecc;padding-top:1rem}.plain:disabled{opacity:.4}.archive .plain:hover:not(:disabled){background:var(--paper);color:var(--ink)}
+.letters h2{margin-bottom:2rem}.leaves{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,3vw,4rem)}.leaf{border-top:2px solid var(--blue);padding-top:1.1rem}.leaf .micro{color:var(--blue);margin-bottom:1.4rem}.leaf p:last-child{font-style:italic}
+.address{background:#dde6f0}.address h2{font-family:var(--prose);font-style:italic;font-size:clamp(3.2rem,6vw,6rem);font-weight:400}
+.vow{background:var(--blue);color:white;text-align:center}.vow .folio{color:#c4e1ff}.vow h2{max-width:15ch;margin:auto}.vow .copy{margin:1.4rem auto 0;max-width:46ch}
+.confession{border-top:1px solid var(--rule)}.post{font-style:italic;color:var(--blue);text-align:right}
+footer{text-align:center;padding:clamp(6rem,12vw,14rem) 1rem}footer h2{font:italic 400 clamp(3.5rem,7vw,7rem)/1.15 var(--prose);color:var(--blue)}footer p{font-style:italic}
+.viewer{position:fixed;inset:0;border:0;margin:0;max-width:none;width:100%;max-height:none;height:100%;padding:1rem;background:#0b192bf7;color:white}
+.viewer[open]{display:grid;grid-template-rows:minmax(0,1fr) auto}.stage{min-height:0;display:grid;place-items:center}.stage img{display:block;max-width:100%;max-height:100%;min-height:0;object-fit:contain}.toolrow{width:min(100%,720px);margin:.8rem auto 0}.viewer button{border:1px solid #9cb6ce;background:none;padding:.65rem;min-height:44px}body:has(.viewer[open]){overflow:hidden}
+@media(max-width:780px){.wrap{width:90%}.heading{grid-template-columns:1.6fr 1fr}.proof{grid-template-columns:1fr 48%}.proof span{font-size:.59rem}.leaves{grid-template-columns:1fr;gap:2rem}.archive-intro{display:block}.archive-intro p{margin-top:1rem}.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.mast nav{font-size:.59rem;gap:.8rem}.brand{font-size:1.15rem}.heading{display:block;margin:2rem 0 1.3rem}h1{font-size:clamp(4.6rem,20.5vw,7.5rem)}.deck{font-size:1.17rem;max-width:33ch;margin-top:1rem}.light-table{grid-template-columns:1fr;gap:.5rem}.mainprint{height:clamp(245px,72vw,345px)}.side{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}.side>p{display:none}.proofs{grid-template-columns:repeat(3,1fr);gap:.35rem}.proof{display:flex;flex-direction:column-reverse;align-items:stretch}.proof img{height:38px}.proof span{padding:.15rem}.mode{font-size:.59rem;padding:.45rem}.caption{font-size:.55rem}.spread,.essay{grid-template-columns:1fr;gap:1.5rem}.grid{grid-template-columns:repeat(3,1fr)}.toolrow{gap:.3rem}.toolrow button,.toolrow output{font-size:.62rem}.post{font-size:1rem}}
+@media(prefers-reduced-motion:no-preference){.fresh{animation:print-in .9s ease-out}@keyframes print-in{from{opacity:.35}to{opacity:1}}}</style></head><body>
+<header class="wrap" id="top">
+  <div class="mast"><a class="brand" href="#top">Elisha / Afterimage</a><nav aria-label="Contents"><a href="#record">Record</a><a href="#plates">Plates</a><a href="#letters">Letters</a></nav></div>
+  <div class="heading"><div><p class="micro">A photographic essay</p><h1>Afterimage</h1></div><p class="deck">I closed the photograph.<br>The light took longer to go.</p></div>
+  <div class="light-table">
+    <div class="print mainprint tinted"><img id="hero-photo" src="./images/76.jpg" alt="Elisha standing against a pale wall." fetchpriority="high"><span class="micro folio-tab" id="stamp">Plate 76</span></div>
+    <aside class="side" aria-label="Cover print controls"><p class="micro">Selected prints</p><div class="proofs"></div><button type="button" class="mode" aria-pressed="true" aria-label="Cyanotype treatment">Cyanotype · On</button></aside>
+  </div>
+  <div class="caption"><span id="caption">Study in white</span><span>Elisha Cuthbert / Print studies</span></div>
+</header>
+<main>
+<section class="section wrap spread" id="record"><div><span class="micro folio">I / Exposure</span><h2>The day I can’t place.</h2></div><div class="copy"><p>I wish I had written the date on the back of something. A ticket, a receipt, an envelope I could turn over now. At the time it was an ordinary day, and I did what people do with ordinary days. I let it pass.</p><p>What I kept was the sight of her. The picture changed. I stayed in my chair a while. Years later I still have that small interval for which my memory can supply neither a room nor a date.</p><p>This is where I have decided to put it.</p></div></section>
+<section class="section stone"><div class="wrap spread"><div><span class="micro folio">II / Colour study</span><h2>The green inside the stone.</h2></div><div class="copy"><p>Blue is the colour I have given these pages. If you ask what colour the feeling is, my answer is still <em>emerald.</em></p><p>A green stone in an open hand looks almost dark until the hand turns. I have gone about whole days like that. Then a face on a screen, and somebody across the table might have wondered why I smiled.</p></div></div></section>
+<section class="section archive" id="plates"><div class="wrap"><span class="micro folio">III / Contact sheets</span><div class="archive-intro"><h2>Eighty-two windows.</h2><p>I know these pictures well. What happened a moment outside each frame belongs to her.</p></div>
+<div class="grid" aria-label="Photographs"></div><div class="controls"><button class="plain" id="earlier">Previous sheet</button><output id="sheet" aria-live="polite"></output><button class="plain" id="later">Next sheet</button></div></div></section>
+<section class="section wrap letters" id="letters"><span class="micro folio">IV / Correspondence</span><h2>Three letters kept.</h2><div class="leaves">
+<article class="leaf"><p class="micro">I / The bell</p><p>You have never heard my voice. A bell down the street sometimes rings after everyone has gone indoors. I think of the long, loose end of that sound, travelling the last few yards alone.</p></article>
+<article class="leaf"><p class="micro">II / The coin</p><p>There is always one coin a traveller brings home by mistake. Years later it turns up in the lining of a coat. His hand remembers the journey before he has even read the lettering. That is how unexpectedly you can be here.</p></article>
+<article class="leaf"><p class="micro">III / The margin</p><p>I used to wonder why a poet would write a woman’s name in the margin and leave the rest of the page bare. Tonight I tried it. For once I had given your name enough room.</p></article>
+</div></section>
+<section class="section address"><div class="wrap essay"><div><span class="micro folio">V / In my own hand</span><h2>Elisha,</h2></div><div class="copy"><p>There are people who can tell from your footstep that you are home. I like knowing that such a sound exists, and that it means something to people whose lives I will never know.</p><p>You need never come across these pages. I wanted somewhere to put a thank-you that would leave you your evening.</p><p>For the light that reached mine, all those evenings ago.</p></div></div></section>
+<section class="section wrap spread"><div><span class="micro folio">VI / For a later reader</span><h2>When these colours have faded.</h2></div><div class="copy"><p>If you find this years from now, look at one photograph before you go. Once, at an hour you cannot recover, a man sat where you are sitting and knew that face at once.</p><p>He loved a woman he never met. He learned to carry that without putting any of its weight on her.</p><p>If someone you love is near enough to hear you, you have something I never had. Call their name. Wait for them to look up.</p></div></section>
+<section class="section vow"><div class="wrap"><span class="micro folio">VII / The vow</span><h2>I know which light to leave on.</h2><p class="copy">Even in a strange room, after a long day, my hand goes looking for the lamp. Let it be like that at the end. One small familiar thing I still have the strength to do.</p></div></section>
+<section class="section wrap spread"><div><span class="micro folio">VIII / The threshold</span><h2>The mark by the door.</h2></div><div class="copy"><p>I have imagined the door so often I could draw the handle for you. I have never once imagined, with any certainty, what lies beyond it.</p><p>There is one detail I do believe in. Down by the sill the floor is worn a little lighter. I would know the shape anywhere. It is where I have stood all these years.</p></div></section>
+<section class="section wrap spread confession"><div><span class="micro folio">IX / The unretouched print</span><h2>The person across the table.</h2></div><div class="copy"><p>I have taken great care with the likeness of a woman three thousand miles away. Three feet away, somebody has more than once had to ask whether I was listening.</p><p>A birthday slips my mind. A tired answer comes out sharp. I can look at a photograph for an hour, yet hurry a person I love through the telling of their day.</p><p>I want those things left in the picture. Distance gave me room to be devoted. It also gave me somewhere comfortable to stand. I chose it, and the choice belongs to me.</p></div></section>
+<p class="wrap post">Some nights, Elisha,<br>I leave the light on a little longer.</p></main>
+<footer><h2>For Elisha.</h2><p>From a stranger who kept the light on.</p></footer>
+<dialog class="viewer" aria-label="Full photograph"><div class="stage"><img alt=""></div><div class="toolrow"><button id="prev">Previous</button><output id="number" aria-live="polite"></output><button id="next">Next</button><button id="close" autofocus>Close</button></div></dialog>
+<script>
+const descriptions = [
+  "Dark-haired portrait with a hand lifted to the collar",
+  "Blonde woman in a black beret, glancing to one side",
+  "Red turtleneck against a garden backdrop",
+  "Woman standing in a doorway in a patterned blouse",
+  "Strapless silver top against dark foliage",
+  "Green evening dress at a premiere",
+  "Reclining among cream cushions",
+  "White shirt in warm amber light",
+  "Seated portrait beside a carved wall",
+  "Over-the-shoulder portrait in side light",
+  "Profile with a pink flower beside her face",
+  "Purple dress against a lavender studio backdrop",
+  "Reclining figure on pale bedding",
+  "Black outfit against a white and red backdrop",
+  "Smiling portrait in a green evening dress",
+  "Seated portrait in a dimly lit room",
+  "Close portrait in soft yellow light",
+  "Pink flower held beside a smiling face",
+  "Reclining portrait in an orange top",
+  "Poolside scene under blue light",
+  "Two figures near stone steps",
+  "Smile over the shoulder in a silver dress",
+  "White top against a bright studio wall",
+  "Denim shorts beside a seaside railing",
+  "Reclining in shallow water",
+  "Seated on wet sand at the shore",
+  "Evening portrait in a plum dress",
+  "Side view in a plum dress at an event",
+  "Reclining on a sofa in a brown blouse",
+  "Plum evening dress viewed from the side",
+  "Black lace outfit in a dark studio",
+  "Pink-tinted hair falling across one eye",
+  "Face lit by a small flame",
+  "Close portrait with pink-tipped blonde hair",
+  "Warmly lit portrait on a studio floor",
+  "White gown on a red carpet",
+  "Over-the-shoulder view at a premiere",
+  "Short blonde hair against a dark background",
+  "White outfit at an evening event",
+  "Amber studio lighting beside a reflector",
+  "Seated figure beside studio lighting equipment",
+  "Slicked-back hair and a high white collar",
+  "White gown in front of a red poster",
+  "Close-up at a red carpet event",
+  "Pale pink dress against greenery",
+  "Reclining outdoors in bright sunlight",
+  "Floral dress against a plain light backdrop",
+  "Dark sleeveless outfit in a studio portrait",
+  "Black jacket beside a sunlit building",
+  "White tank top against a white background",
+  "Blue blouse against a clear sky",
+  "Seated with a hand at her forehead",
+  "Cream bedding and cushions around a reclining figure",
+  "Silver dress against a deep red backdrop",
+  "Black-and-white portrait on striped cushions",
+  "Short-haired portrait against black",
+  "White gown seen over one shoulder",
+  "Strapless patterned dress in subdued studio light",
+  "Black jacket and light skirt beside a lamp",
+  "Chin resting on folded arms",
+  "Sunlit close-up against a blue sky",
+  "Seated by a textured stone wall",
+  "White outfit on a pale sofa",
+  "Black swimwear in a blue-lit crowd",
+  "Two figures in a dimly lit bedroom",
+  "Red turtleneck beside a window at night",
+  "White tank top against a neutral wall",
+  "Smiling face against red",
+  "Red top against a white studio backdrop",
+  "Group posed against a white backdrop",
+  "Close-up outdoors in a white top",
+  "Woman in a red sweater turning outdoors",
+  "Seated among pale patterned cushions",
+  "Hand against cheek on a red background",
+  "Full-length purple gown on a red carpet",
+  "White outfit against a light wall",
+  "Straight blonde hair at an evening event",
+  "Seated among pale patterned cushions",
+  "Hands behind head against white",
+  "Pale pink gown at an event",
+  "White jacket against a dark backdrop",
+  "Smiling over one shoulder in a plum dress"
+];
+const id = name => document.getElementById(name);
+const pad = n => String(n).padStart(2,'0');
+const path = n => './images/' + pad(n) + '.jpg';
+const studies = [
+  {n:76, title:'Study in white', focus:'26%'},
+  {n:26, title:'At the waterline', focus:'42%'},
+  {n:71, title:'A frame held still', focus:'32%'}
+];
+const hero = id('hero-photo');
+const proofs = document.querySelector('.proofs');
+function choosePrint(study) {
+  hero.src = path(study.n);
+  hero.alt = descriptions[study.n - 1];
+  hero.style.setProperty('--focus', study.focus);
+  id('stamp').textContent = 'Plate ' + pad(study.n);
+  id('caption').textContent = study.title;
+  Array.from(proofs.children).forEach(b => b.setAttribute('aria-pressed',Number(b.dataset.plate) === study.n));
+}
+for (const study of studies) {
+  const button = document.createElement('button');
+  button.className = 'proof';
+  button.dataset.plate = study.n;
+  button.setAttribute('aria-label','Show plate ' + study.n + ', ' + study.title);
+  const label = document.createElement('span');
+  label.textContent = 'No. ' + pad(study.n);
+  const img = document.createElement('img');
+  img.src = path(study.n);
+  img.alt = '';
+  button.append(label,img);
+  button.onclick = () => choosePrint(study);
+  proofs.append(button);
+}
+choosePrint(studies[0]);
+const mode = document.querySelector('.mode');
+mode.onclick = () => {
+  const on = hero.parentElement.classList.toggle('tinted');
+  mode.setAttribute('aria-pressed',on);
+  mode.textContent = 'Cyanotype · ' + (on ? 'On' : 'Off');
+};
+const grid = document.querySelector('.grid');
+const viewer = document.querySelector('.viewer');
+const full = viewer.querySelector('img');
+let sheet = 0;
+let selected = 1;
+const pageSize = 12;
+const pages = Math.ceil(descriptions.length / pageSize);
+function selectPhoto(n) {
+  selected = (n - 1 + descriptions.length) % descriptions.length + 1;
+  full.src = path(selected);
+  full.alt = descriptions[selected - 1];
+  id('number').textContent = pad(selected) + ' / ' + descriptions.length;
+}
+function renderSheet(n) {
+  sheet = n;
+  grid.replaceChildren();
+  for (let number = n * pageSize + 1; number <= Math.min((n + 1) * pageSize, descriptions.length); number++) {
+    const tile = document.createElement('button');
+    tile.className = 'frame fresh';
+    const img = document.createElement('img');
+    img.src = path(number);
+    img.alt = descriptions[number - 1];
+    img.loading = 'lazy';
+    const label = document.createElement('span');
+    label.textContent = pad(number);
+    tile.append(img,label);
+    tile.onclick = () => { selectPhoto(number); viewer.showModal(); };
+    grid.append(tile);
+  }
+  id('sheet').textContent = pad(n + 1) + ' / ' + pad(pages);
+  id('earlier').disabled = n === 0;
+  id('later').disabled = n === pages - 1;
+}
+renderSheet(0);
+id('earlier').onclick = () => renderSheet(sheet - 1);
+id('later').onclick = () => renderSheet(sheet + 1);
+id('next').onclick = () => selectPhoto(selected + 1);
+id('prev').onclick = () => selectPhoto(selected - 1);
+id('close').onclick = () => viewer.close();
+viewer.addEventListener('keydown', event => {
+  if (['ArrowLeft','ArrowRight'].includes(event.key)) {
+    event.preventDefault();
+    selectPhoto(selected + (event.key === 'ArrowLeft' ? -1 : 1));
+  }
+});
+viewer.addEventListener('click', event => {
+  if (event.target === viewer || event.target.classList.contains('stage')) viewer.close();
+});
+</script></body></html>

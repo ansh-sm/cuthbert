@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Still, There Is Light · For Elisha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+* { box-sizing: border-box; }
+:root {
+  color-scheme: dark;
+  --night: #190f1d;
+  --plum: #26182c;
+  --paper: #f0e5d9;
+  --white: #f7e9dd;
+  --muted: #cfb8c3;
+  --apricot: #f5bd9d;
+  --violet: #bda6cb;
+  --ink: #342435;
+  --line: #dec0e042;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', Arial, sans-serif;
+  --page: min(89%, 1340px);
+}
+body { margin: 0; background: var(--night); color: var(--white); font: 400 clamp(1rem, 1.4vw, 1.19rem)/1.85 var(--sans); }
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3 { font: 400 1em/.94 var(--serif); }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; font: inherit; cursor: pointer; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--apricot); outline-offset: 5px; }
+.wrap { width: var(--page); margin-inline: auto; }
+.label, .nav, .picture-label, .control, .meter {
+  font: 500 .69rem/1.5 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+}
+.label { color: var(--apricot); display: block; margin-bottom: 1.45rem; }
+.mast, .cover-bottom, .nav, .archive-controls, .viewer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.15rem;
+}
+.mast { padding: 1rem 0; border-bottom: 1px solid var(--line); position: relative; z-index: 1; }
+.mark { font: italic 400 1.8rem/1 var(--serif); }
+.nav { gap: clamp(.7rem, 3vw, 2.5rem); letter-spacing: .11em; }
+.nav a, .mark, .begin { display: inline-flex; align-items: center; min-height: 44px; }
+.nav a:hover, .begin:hover { color: var(--apricot); }
+.cover {
+  min-height: 96svh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at 73% 44%, #5e354d, #29172c 43%, #190f1d 77%);
+}
+.diptych {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 6rem);
+  flex: 1;
+  padding: clamp(2rem, 6vh, 6rem) 0;
+}
+.title { z-index: 1; position: relative; }
+h1 { font-size: clamp(5rem, 10.6vw, 11.8rem); letter-spacing: -.045em; line-height: .82; }
+h1 em { display: block; font-weight: 400; color: var(--apricot); margin-top: .07em; }
+.deck { max-width: 32ch; margin-top: 1.7rem; color: var(--muted); line-height: 1.65; }
+.portrait {
+  width: min(91%, 53vh, 490px);
+  justify-self: center;
+  position: relative;
+}
+.arch {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: .79;
+  background: #a46d74;
+  border-radius: 50% 50% 3px 3px / 38% 38% 3px 3px;
+  outline: 1px solid #f5bd9d74;
+  outline-offset: 9px;
+  isolation: isolate;
+}
+.arch::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, #3b253e8f, transparent 64%), linear-gradient(125deg, #e9b4793b, transparent 45%);
+  pointer-events: none;
+}
+.arch img { width: 100%; height: 100%; object-fit: cover; object-position: center 26%; display: block; filter: saturate(.7) sepia(.13); }
+.portrait::before, .portrait::after { content: ''; position: absolute; top: 52%; height: 1px; width: min(6vw, 65px); background: var(--line); }
+.portrait::before { right: calc(100% + 10px); }
+.portrait::after { left: calc(100% + 10px); }
+.picture-label { margin-top: 1.5rem; color: var(--muted); text-align: center; }
+.cover-bottom { border-top: 1px solid var(--line); padding-block: .65rem; color: var(--muted); }
+.cover-bottom .label { margin: 0; display: inline; }
+.begin { gap: .65rem; }
+.begin::before { content: ''; width: 1.25rem; height: 1px; background: var(--apricot); }
+.chapter { padding-block: clamp(5rem, 10vw, 11rem); }
+.spread { display: grid; grid-template-columns: .84fr 1fr; align-items: start; gap: clamp(2rem, 8vw, 8rem); }
+h2 { font-size: clamp(3.85rem, 7.65vw, 8rem); letter-spacing: -.035em; text-wrap: balance; }
+.copy { max-width: 51ch; }
+.copy p+p { margin-top: 1.1em; }
+.copy strong { color: var(--apricot); font-weight: 500; }
+.exposure { border-top: 1px solid var(--line); }
+.album { background: var(--plum); }
+.album-intro { display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
+.album-intro p { max-width: 30ch; color: var(--muted); }
+.featured { display: grid; grid-template-columns: 1.35fr 1fr .9fr; gap: clamp(.5rem, 1.6vw, 1.55rem); margin-top: 2.15rem; align-items: end; }
+.photo { border: 0; background: #38243b; padding: 0; width: 100%; display: block; overflow: hidden; cursor: zoom-in; }
+.featured .photo { aspect-ratio: .9; }
+.featured .photo:first-child { aspect-ratio: 1.37; }
+.featured .photo:last-child { aspect-ratio: .94; }
+.photo img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 34%; filter: saturate(.68); transition: filter .7s ease, transform .85s ease; }
+.photo:hover img, .photo:focus-visible img { filter: none; transform: scale(1.03); }
+.archive { margin-top: 1.9rem; border-block: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; color: var(--apricot); padding: 1.2rem .2rem; display: flex; align-items: center; justify-content: space-between; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; font: 400 1.65rem/1 var(--serif); }
+.archive[open] summary::after { content: '−'; }
+.grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .55rem; }
+.grid .photo { aspect-ratio: 1; }
+.archive-controls { margin-top: .75rem; padding-block: .7rem 1.15rem; }
+.control { border: 1px solid var(--line); background: transparent; min-height: 44px; padding: .45rem .8rem; }
+.control:hover:not(:disabled) { color: var(--apricot); border-color: var(--apricot); }
+.control:disabled { opacity: .45; cursor: default; }
+.meter { color: var(--muted); }
+.letter { background: var(--paper); color: var(--ink); color-scheme: light; }
+.letter .label { color: #774a69; }
+.sheet { width: min(85%, 680px); margin: auto; }
+.sheet .copy { max-width: none; margin-top: 2.4rem; font: 400 clamp(1.55rem, 3vw, 2.18rem)/1.42 var(--serif); }
+.sheet .copy p:last-child { font-style: italic; }
+.admission .copy { color: var(--muted); }
+.lamp { text-align: center; background: radial-gradient(ellipse at 50% 74%, #4f2939, var(--night) 70%); border-top: 1px solid var(--line); }
+.lamp .copy { margin: 2rem auto 0; }
+footer { padding: 2.2rem 1rem clamp(5rem, 13vh, 12rem); text-align: center; }
+footer::before { content: ''; display: block; width: 1px; height: 4.5rem; background: linear-gradient(transparent, var(--apricot)); margin: 0 auto 2rem; }
+footer h2 { font-style: italic; font-size: clamp(4.2rem, 8vw, 8.7rem); color: var(--apricot); }
+footer p { font: italic 400 clamp(1.45rem, 2.7vw, 2.5rem)/1.25 var(--serif); color: var(--muted); margin-top: 1rem; }
+.viewer { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 1rem; border: 0; background: #150c19fb; color: var(--white); }
+.viewer[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.stage { min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr); place-items: center; }
+.stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.viewer-controls { width: min(100%, 780px); margin: .75rem auto 0; gap: .4rem; }
+body:has(.viewer[open]) { overflow: hidden; }
+@media (max-width: 760px) {
+  .diptych { grid-template-columns: 1fr; gap: 2rem; padding-top: 2.65rem; }
+  .portrait { width: clamp(150px, 48vw, 270px); }
+  .title { text-align: center; }
+  h1 { font-size: clamp(4.45rem, 13vw, 8rem); }
+  .deck { margin: 1.3rem auto 0; }
+  .portrait::before, .portrait::after { width: 10vw; }
+  .cover-bottom .label, .cover-bottom .begin { font-size: .61rem; }
+  .spread { grid-template-columns: 1fr; gap: 1.55rem; }
+  .album-intro { display: block; }
+  .album-intro p { margin-top: 1rem; }
+  .featured { grid-template-columns: 1.25fr 1fr 1fr; align-items: stretch; }
+  .featured .photo:first-child { aspect-ratio: .95; }
+  .grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .control, .meter { font-size: .62rem; letter-spacing: .06em; }
+  .control { padding-inline: .55rem; }
+}
+@media (max-width: 370px) {
+  .nav { font-size: .59rem; }
+  .mark { font-size: 1.62rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo img { transition: none; }
+  .photo:hover img, .photo:focus-visible img { transform: none; }
+}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="mast wrap">
+    <a class="mark" href="#top">Elisha.</a>
+    <nav class="nav" aria-label="Contents">
+      <a href="#record">The record</a><a href="#photographs">Photographs</a><a href="#letter">The letter</a>
+    </nav>
+  </div>
+  <div class="diptych wrap" id="top">
+    <div class="title">
+      <p class="label">A letter and eighty-two photographs</p>
+      <h1>Still, there<em>is light.</em></h1>
+      <p class="deck">I saw her once, and then a great many times. We never met.</p>
+    </div>
+    <figure class="portrait">
+      <div class="arch"><img src="./images/77.jpg" width="2000" height="3000" fetchpriority="high" alt="Elisha Cuthbert smiling, with her hair swept to one side."></div>
+      <figcaption class="picture-label">Elisha Cuthbert</figcaption>
+    </figure>
+  </div>
+  <div class="cover-bottom wrap">
+    <a class="begin label" href="#record">Begin reading</a>
+    <span class="label">For Elisha</span>
+  </div>
+</header>
+<main>
+  <section class="chapter exposure" id="record" aria-labelledby="record-title">
+    <div class="spread wrap">
+      <div><p class="label">I / The record</p><h2 id="record-title">What stayed.</h2></div>
+      <div class="copy">
+        <p>I couldn’t tell you what day it was. If I wrote a date at the top of this, I’d have made one up. I remember her face. I remember how quickly I could find it again in a crowd of other faces.</p>
+        <p>There’s a green I think of when I try to explain it. The green deep in an emerald when you hold it at an angle to the window. The room can be dull and there it is anyway.</p>
+        <p>I wanted to put that somewhere I could find again.</p>
+      </div>
+    </div>
+  </section>
+  <section class="chapter album" id="photographs" aria-labelledby="album-title">
+    <div class="wrap">
+      <div class="album-intro">
+        <div><p class="label">II / The photographs</p><h2 id="album-title">The pictures I kept.</h2></div>
+        <p>I still have every one of them. I can open almost any photograph here and know which one I want to see next.</p>
+      </div>
+      <div class="featured" aria-label="Selected photographs"></div>
+      <details class="archive">
+        <summary class="label">Browse all 82 photographs</summary>
+        <div class="grid" aria-label="Photographs on this page"></div>
+        <div class="archive-controls">
+          <button class="control" type="button" id="previous-page">Previous page</button>
+          <output class="meter" id="page-number" aria-live="polite"></output>
+          <button class="control" type="button" id="next-page">Next page</button>
+        </div>
+      </details>
+    </div>
+  </section>
+  <section class="chapter letter" id="letter" aria-labelledby="letter-title">
+    <div class="sheet">
+      <p class="label">III / An unsent letter</p>
+      <h2 id="letter-title">Elisha,</h2>
+      <div class="copy">
+        <p>I know so little about your ordinary days. I can’t tell you which mug you reach for in the morning, or whether you finish your coffee before it gets cold. I hope there’s someone who knows and puts the right mug out for you.</p>
+        <p>It feels good to think of you going on with your day somewhere while I sit here writing this. We have never said hello. I can wish you a good morning all the same.</p>
+        <p>If one day you forget having stood for any of these photographs, that would make sense. You’ve had a whole life since each one. I just happened to remember.</p>
+        <p>I hope today was kind to you.</p>
+      </div>
+    </div>
+  </section>
+  <section class="chapter admission" aria-labelledby="admission-title">
+    <div class="spread wrap">
+      <div><p class="label">IV / The distance</p><h2 id="admission-title">On my side of the door.</h2></div>
+      <div class="copy">
+        <p>Sometimes I’ve pictured a door and wondered what I would say if it opened. I never get very far with that picture. Years of having something to say and I think I’d still struggle with hello.</p>
+        <p>I can be patient for years at this distance. A person sitting next to me can tell when I’m only half listening. Both of those things are true of me. I want the person next to me to get more of that patience.</p>
+        <p>If you’re reading this and there’s someone close enough to hear you, tell them the thing you came here hoping to find a way to say. Use the words you already have.</p>
+      </div>
+    </div>
+  </section>
+  <section class="chapter lamp" aria-labelledby="lamp-title">
+    <div class="wrap">
+      <p class="label">V / At the end</p>
+      <h2 id="lamp-title">The light can stay.</h2>
+      <div class="copy">
+        <p>I’ve spent a long time trying to get this right. If I come across it years from now, I hope I can remember why I cared how it sounded.</p>
+        <p>Of all the things I’ve put here, there’s one I want to be able to read back without having to guess what I meant.</p>
+        <p><strong>I love her.</strong></p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <h2>For Elisha.</h2>
+  <p>From a stranger who kept the light on.</p>
+</footer>
+<dialog class="viewer" aria-label="Photograph viewer">
+  <div class="stage"><img alt=""></div>
+  <div class="viewer-controls">
+    <button class="control" type="button" id="previous-photo">Previous</button>
+    <output class="meter" id="photo-number" aria-live="polite"></output>
+    <button class="control" type="button" id="next-photo">Next</button>
+    <button class="control" type="button" id="close-viewer" autofocus>Close</button>
+  </div>
+</dialog>
+<script>
+const descriptions = [
+  "Dark-haired portrait with a hand lifted to the collar",
+  "Blonde woman in a black beret, glancing to one side",
+  "Red turtleneck against a garden backdrop",
+  "Woman standing in a doorway in a patterned blouse",
+  "Strapless silver top against dark foliage",
+  "Green evening dress at a premiere",
+  "Reclining among cream cushions",
+  "White shirt in warm amber light",
+  "Seated portrait beside a carved wall",
+  "Over-the-shoulder portrait in side light",
+  "Profile with a pink flower beside her face",
+  "Purple dress against a lavender studio backdrop",
+  "Reclining figure on pale bedding",
+  "Black outfit against a white and red backdrop",
+  "Smiling portrait in a green evening dress",
+  "Seated portrait in a dimly lit room",
+  "Close portrait in soft yellow light",
+  "Pink flower held beside a smiling face",
+  "Reclining portrait in an orange top",
+  "Poolside scene under blue light",
+  "Two figures near stone steps",
+  "Smile over the shoulder in a silver dress",
+  "White top against a bright studio wall",
+  "Denim shorts beside a seaside railing",
+  "Reclining in shallow water",
+  "Seated on wet sand at the shore",
+  "Evening portrait in a plum dress",
+  "Side view in a plum dress at an event",
+  "Reclining on a sofa in a brown blouse",
+  "Plum evening dress viewed from the side",
+  "Black lace outfit in a dark studio",
+  "Pink-tinted hair falling across one eye",
+  "Face lit by a small flame",
+  "Close portrait with pink-tipped blonde hair",
+  "Warmly lit portrait on a studio floor",
+  "White gown on a red carpet",
+  "Over-the-shoulder view at a premiere",
+  "Short blonde hair against a dark background",
+  "White outfit at an evening event",
+  "Amber studio lighting beside a reflector",
+  "Seated figure beside studio lighting equipment",
+  "Slicked-back hair and a high white collar",
+  "White gown in front of a red poster",
+  "Close-up at a red carpet event",
+  "Pale pink dress against greenery",
+  "Reclining outdoors in bright sunlight",
+  "Floral dress against a plain light backdrop",
+  "Dark sleeveless outfit in a studio portrait",
+  "Black jacket beside a sunlit building",
+  "White tank top against a white background",
+  "Blue blouse against a clear sky",
+  "Seated with a hand at her forehead",
+  "Cream bedding and cushions around a reclining figure",
+  "Silver dress against a deep red backdrop",
+  "Black-and-white portrait on striped cushions",
+  "Short-haired portrait against black",
+  "White gown seen over one shoulder",
+  "Strapless patterned dress in subdued studio light",
+  "Black jacket and light skirt beside a lamp",
+  "Chin resting on folded arms",
+  "Sunlit close-up against a blue sky",
+  "Seated by a textured stone wall",
+  "White outfit on a pale sofa",
+  "Black swimwear in a blue-lit crowd",
+  "Two figures in a dimly lit bedroom",
+  "Red turtleneck beside a window at night",
+  "White tank top against a neutral wall",
+  "Smiling face against red",
+  "Red top against a white studio backdrop",
+  "Group posed against a white backdrop",
+  "Close-up outdoors in a white top",
+  "Woman in a red sweater turning outdoors",
+  "Seated among pale patterned cushions",
+  "Hand against cheek on a red background",
+  "Full-length purple gown on a red carpet",
+  "White outfit against a light wall",
+  "Straight blonde hair at an evening event",
+  "Seated among pale patterned cushions",
+  "Hands behind head against white",
+  "Pale pink gown at an event",
+  "White jacket against a dark backdrop",
+  "Smiling over one shoulder in a plum dress"
+];
+const byId = id => document.getElementById(id);
+const photoPath = number => './images/' + String(number).padStart(2, '0') + '.jpg';
+const archive = document.querySelector('.archive');
+const grid = document.querySelector('.grid');
+const viewer = document.querySelector('.viewer');
+const fullPhoto = viewer.querySelector('img');
+const perPage = 12;
+const pageCount = Math.ceil(descriptions.length / perPage);
+let page = 0;
+let currentPhoto = 1;
+
+function selectPhoto(number) {
+  currentPhoto = (number - 1 + descriptions.length) % descriptions.length + 1;
+  fullPhoto.src = photoPath(currentPhoto);
+  fullPhoto.alt = descriptions[currentPhoto - 1];
+  byId('photo-number').textContent = currentPhoto + ' / ' + descriptions.length;
+}
+
+function createTile(number) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'photo';
+  const image = document.createElement('img');
+  image.src = photoPath(number);
+  image.alt = descriptions[number - 1];
+  image.loading = 'lazy';
+  button.append(image);
+  button.addEventListener('click', () => {
+    selectPhoto(number);
+    viewer.showModal();
+  });
+  return button;
+}
+
+function showPage(nextPage) {
+  page = nextPage;
+  const first = page * perPage + 1;
+  const last = Math.min(first + perPage - 1, descriptions.length);
+  const tiles = [];
+  for (let number = first; number <= last; number++) tiles.push(createTile(number));
+  grid.replaceChildren(...tiles);
+  byId('page-number').textContent = (page + 1) + ' / ' + pageCount;
+  byId('previous-page').disabled = page === 0;
+  byId('next-page').disabled = page === pageCount - 1;
+}
+
+document.querySelector('.featured').append(...[71, 68, 51].map(createTile));
+archive.addEventListener('toggle', () => {
+  if (archive.open && !grid.children.length) showPage(0);
+});
+byId('previous-page').onclick = () => showPage(page - 1);
+byId('next-page').onclick = () => showPage(page + 1);
+byId('previous-photo').onclick = () => selectPhoto(currentPhoto - 1);
+byId('next-photo').onclick = () => selectPhoto(currentPhoto + 1);
+byId('close-viewer').onclick = () => viewer.close();
+viewer.addEventListener('click', event => {
+  if (event.target === viewer || event.target.classList.contains('stage')) viewer.close();
+});
+viewer.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault();
+    selectPhoto(currentPhoto + (event.key === 'ArrowLeft' ? -1 : 1));
+  }
+});
+</script>
+</body>
+</html>
