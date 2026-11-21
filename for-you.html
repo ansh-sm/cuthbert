@@ -411,31 +411,4 @@ addEventListener('resize', updateProgress);
 addEventListener('load', updateProgress);
 updateProgress();
 </script>
-<style>
-body, h1, h2, h3, p, span, a, figure, figcaption {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-  pointer-events: auto;
-}
-</style>
-<script>
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-document.addEventListener('keydown', e => {
-  if (e.key === 'F12' || 
-     ((e.ctrlKey || e.metaKey) && (e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) ||
-     ((e.ctrlKey || e.metaKey) && ['u','s','c','p'].includes(e.key.toLowerCase()))) {
-    e.preventDefault();
-  }
-});
-</script>
 </body></html>
